@@ -1,0 +1,63 @@
+<comment>
+problem = 2D kruskal-Schwarzschild instability
+reference  = Gill, Granot, Lyubarnsky 2018
+configure  = --prob=2Dks -s -b --coord=cartesian --flux=hlld -mpi
+
+
+<job>
+problem_id = 2Dks      # problem ID: basename of output filenames
+
+<output1>
+file_type   = vtk
+dt          = 0.1
+variable    = d
+id          = d
+data_format = %7.16e
+
+
+<time>
+cfl_number  = 0.5
+nlim        = -1
+tlim        = 10
+integrator  = vl2       # time integration algorithm
+xorder      = 3         # order of spatial reconstruction
+ncycle_out  = 1         # interval for stdout summary info
+
+
+<mesh>
+nx1       = 100        # Number of zones in X1-direction
+x1min     = -0.05      # minimum value of X1
+x1max     = 0.05       # maximum value of X1
+ix1_bc    = periodic   # inner-I (X1) boundary flag
+ox1_bc    = periodic   # outer-I (X1) boundary flag
+
+nx2       = 200           # Number of zones in X2-direction
+x2min     = -0.1          # minimum value of X2
+x2max     = 0.1           # maximum value of X2
+ix2_bc    = reflecting    # inner-I (X2) boundary flag
+ox2_bc    = reflecting    # outer-I (X2) boundary flag
+
+nx3       = 1          # Number of zones in X3-direction
+x3min     = -0.05      # minimum value of X3
+x3max     = 0.05       # maximum value of X3
+bc_ix3    = periodic   # inner-I (X3) boundary flag
+bc_ox3    = periodic   # outer-I (X3) boundary flag
+
+
+<meshblock>
+
+nx1 = 4   # Esto dividirá la malla en 4 bloques en la dirección x1
+nx2 = 4
+nx3 = 1
+
+<hydro>
+gamma = 1.33333333333
+
+<problem>
+
+amp   = 9.53e-7    #v1=vakv
+sigma = 10.0
+delta = 0.01
+nx    = 1
+ny    = 1
+drat  = 3.0
