@@ -91,8 +91,6 @@ parser.add_argument(
         'cylindrical',
         'spherical_polar',
         'minkowski',
-        'sinusoidal',
-        'tilted',
         'schwarzschild',
         'kerr-schild',
         'gr_user'],
@@ -724,7 +722,7 @@ if args['chemistry'] is not None:
 else:
     definitions['CHEMISTRY_ENABLED'] = '0'
     definitions['NUMBER_CHEMICAL_SPECIES'] = '0'
-    makefile_options['CHEMNET_FILE'] = ''
+    makefile_options['CHEMNET_FILE'] = 'src/chemistry/network/none.cpp'
     definitions['CHEMNETWORK_HEADER'] = '../chemistry/network/chem_network.hpp'
 
 # check number of species and scalars
