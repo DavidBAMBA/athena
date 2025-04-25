@@ -1,0 +1,74 @@
+<comment>
+problem   = Harris current sheet - Sweet-Parker laminar reconnection
+reference = Loureiro et al., Phys. Plasmas 16, 056104 (2009)
+configure = --prob=harris_laminar  -b
+
+<job>
+problem_id = harris_laminar
+
+<output1>
+file_type  = hst
+dt         = 0.5
+
+<output2>
+file_type  = vtk
+variable   = prim
+id         = prim
+dt         = 1.0
+
+<output3>
+file_type  = vtk
+variable   = cons
+id         = cons
+dt         = 1.0
+
+<output3>
+file_type  = rst
+dt         = 50.0
+
+<time>
+cfl_number    = 0.3
+nlim          = 10000000
+tlim          = 200.0
+integrator    = vl2
+xorder        = 2
+ncycle_out    = 500
+correct_ic    = true
+dt_diagnostics = 0
+
+<mesh>
+nx1        = 512
+x1min      = -1.0
+x1max      = 1.0
+ix1_bc     = periodic
+ox1_bc     = periodic
+
+nx2        = 256
+x2min      = -0.25
+x2max      = 0.25
+ix2_bc     = outflow
+ox2_bc     = outflow
+
+nx3        = 1
+x3min      = 0.0
+x3max      = 1.0
+ix3_bc     = periodic
+ox3_bc     = periodic
+
+<meshblock>
+nx1        = 128
+nx2        = 128
+nx3        = 1
+
+<hydro>
+gamma     = 1.6666667
+
+<problem>
+b0      = 1.0           # Asymptotic magnetic field
+a       = 0.05          # Half-thickness of current sheet
+rho0    = 1.0           # Peak density in the center
+rho_bg  = 0.1           # Background density
+p0      = 0.2           # Uniform gas pressure
+dvamp   = 0.0        # Pequeña perturbación inicial en vy
+sigma   = 0.1           # Width of perturbation in z
+eta_ohm = 1e-4          # Correcta resistividad de Sweet-Parker
